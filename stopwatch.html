@@ -14,19 +14,15 @@
     color: #0f0;
     font-family: Arial, sans-serif;
   }
-
   #time {
     font-size: 60px;
     margin-bottom: 20px;
   }
-
   button {
     font-size: 20px;
     padding: 10px 20px;
     margin: 5px;
-    cursor: pointer;
   }
-
   #message {
     margin-top: 30px;
     font-size: 40px;
@@ -34,10 +30,8 @@
     display: none;
     animation: blink 1s infinite;
   }
-
   @keyframes blink {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0; }
+    50% { opacity: 0; }
   }
 </style>
 </head>
@@ -54,35 +48,35 @@
 <div id="message">YOU HAVE BEEN HACKED</div>
 
 <script>
-  let timer;
-  let ms = 0;
+let timer;
+let ms = 0;
 
-  function update() {
-    ms += 100;
-    let seconds = Math.floor(ms / 1000);
-    let minutes = Math.floor(seconds / 60);
-    seconds %= 60;
-    document.getElementById("time").textContent =
-      `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${Math.floor((ms % 1000)/100)}`;
-  }
+function update() {
+  ms += 100;
+  let s = Math.floor(ms / 1000);
+  let m = Math.floor(s / 60);
+  s %= 60;
+  document.getElementById("time").textContent =
+    `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${Math.floor((ms%1000)/100)}`;
+}
 
-  function start() {
-    document.getElementById("message").style.display = "none";
-    if (!timer) timer = setInterval(update, 100);
-  }
+function start() {
+  document.getElementById("message").style.display = "none";
+  if (!timer) timer = setInterval(update, 100);
+}
 
-  function stop() {
-    clearInterval(timer);
-    timer = null;
-    document.getElementById("message").style.display = "block";
-  }
+function stop() {
+  clearInterval(timer);
+  timer = null;
+  document.getElementById("message").style.display = "block";
+}
 
-  function reset() {
-    stop();
-    ms = 0;
-    document.getElementById("time").textContent = "00:00.0";
-    document.getElementById("message").style.display = "none";
-  }
+function reset() {
+  stop();
+  ms = 0;
+  document.getElementById("time").textContent = "00:00.0";
+  document.getElementById("message").style.display = "none";
+}
 </script>
 
 </body>
